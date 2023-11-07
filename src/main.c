@@ -33,56 +33,37 @@ int mx_count_dir_size(DIR* dir) {
 
 int main(int argc, char *argv[]) {  
     if(argc == 1) {
-        DIR* current_dir = NULL;
+        DIR* dir = NULL;
         struct dirent *drent = NULL;
-        current_dir = opendir(".");
-        // int size = mx_count_dir_size(current_dir);
-        // printf("%d\n", size);
+        dir = mx_opendir(".");
 
-        if(current_dir == NULL) {
-            perror(argv[0]);
-            exit(EXIT_FAILURE);
-        }
-
-        while((drent = readdir(current_dir)) != NULL) {
+        while((drent = readdir(dir)) != NULL) {
             mx_printstr(drent->d_name);
             acl_t acl = acl_get_file(drent->d_name, ACL_TYPE_ACCESS);
+            if(acl == NULL) {
+                mx_printerr("uls: ");
+                mx_printerr(drent->d_name);
+                mx_printerr(": ");
+                mx_printerr(strerror(errno));
+                exit(EXIT_FAILURE);
+            }
+
             ssize_t size = 0;
             char* acl_text = acl_to_text(acl, &size);
-            printf("%s\n", acl_text);
+            if(acl_text == NULL) {
+                mx_printerr("uls: ");
+                mx_printerr(drent->d_name);
+                mx_printerr(": ");
+                mx_printerr(strerror(errno));
+                exit(EXIT_FAILURE);
+            }
+            printf(" %s\n", acl_text);
             mx_printchar(' ');
         }
         mx_printchar('\n');
-        closedir(current_dir);
+        closedir(dir);
     }
-    else if(argc == 2) {
-        DIR* current_dir = NULL;
-        struct dirent *drent = NULL;
-        current_dir = opendir(argv[1]);
-        // int size = mx_count_dir_size(current_dir);
-        // printf("%d\n", size);
-
-        if(current_dir == NULL) {
-            mx_printerr("uls: ");
-            mx_printerr(argv[1]);
-            mx_printerr(": ");
-            mx_printerr(strerror(errno));
-            exit(EXIT_FAILURE);
-        }
-
-
-        while((drent = readdir(current_dir)) != NULL) {
-            mx_printstr(drent->d_name);
-            acl_t acl = acl_get_file(drent->d_name, ACL_TYPE_ACCESS);
-            ssize_t size = 0;
-            char* acl_text = acl_to_text(acl, &size);
-            printf("%s\n", acl_text);
-            mx_printchar(' ');
-        }
-        mx_printchar('\n');
-        closedir(current_dir);
-    }
-
+    
     return EXIT_SUCCESS;
 }
 
