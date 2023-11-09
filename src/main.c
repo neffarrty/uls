@@ -99,6 +99,8 @@ int main(int argc, char *argv[]) {
 
         closedir(dir);
     }
+
+    mx_check_flags(argc, argv, 0);
     
     return EXIT_SUCCESS;
 }
