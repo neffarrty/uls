@@ -1,106 +1,65 @@
 #include "uls.h"
 
-unsigned short LS_FLAGS = 0x00; // 0000 0000 0000 0000
-
-unsigned short FLAG_l   = 0x01; // 0000 0000 0000 0001
-
-void mx_check_flags(int argc, char *argv[], int flags) {
+void mx_check_flags(int argc, char *argv[], unsigned short *flags) {
     for(int i = 1; i < argc; i++) {
         if(argv[i][0] == '-') {
             for(int j = 1; j < mx_strlen(argv[i]); j++) {
                 switch(argv[i][j]) {
                     case 'l':
-                        LS_FLAGS |= FLAG_l;
-                        mx_printstr("option: ");
-                        mx_printchar('l');
-                        mx_printchar('\n');
+                        *flags = *flags | FLAG_l;
                         break;
                     case 'R':
-                        mx_printstr("option: ");
-                        mx_printchar('R');
-                        mx_printchar('\n');
+                        *flags = *flags | FLAG_R;
                         break;
                     case 'A':
-                        mx_printstr("option: ");
-                        mx_printchar('A');
-                        mx_printchar('\n');
+                        *flags = *flags | FLAG_A;
                         break;
                     case 'a':
-                        mx_printstr("option: ");
-                        mx_printchar('a');
-                        mx_printchar('\n');
+                        *flags = *flags | FLAG_a;
                         break;
                     case 'G':
-                        mx_printstr("option: ");
-                        mx_printchar('G');
-                        mx_printchar('\n');
+                        *flags = *flags | FLAG_G;
                         break;
                     case 'h':
-                        mx_printstr("option: ");
-                        mx_printchar('h');
-                        mx_printchar('\n');
+                        *flags = *flags | FLAG_h;
                         break;
                     case '@':
-                        mx_printstr("option: ");
-                        mx_printchar('@');
-                        mx_printchar('\n');
                         break;
                     case 'e':
-                        mx_printstr("option: ");
-                        mx_printchar('e');
-                        mx_printchar('\n');
+                        *flags = *flags | FLAG_e;
                         break;
                     case 'T':
-                        mx_printstr("option: ");
-                        mx_printchar('T');
-                        mx_printchar('\n');
+                        *flags = *flags | FLAG_T;
                         break;
                     case '1':
-                        mx_printstr("option: ");
-                        mx_printchar('1');
-                        mx_printchar('\n');
+                        *flags = *flags | FLAG_1;
                         break;
                     case 'C':
-                        mx_printstr("option: ");
-                        mx_printchar('C');
-                        mx_printchar('\n');
+                        *flags = *flags | FLAG_C;
                         break;
                     case 'r':
-                        mx_printstr("option: ");
-                        mx_printchar('r');
-                        mx_printchar('\n');
+                        *flags = *flags | FLAG_r;
                         break;
                     case 't':
-                        mx_printstr("option: ");
-                        mx_printchar('t');
-                        mx_printchar('\n');
+                        *flags = *flags | FLAG_t;
                         break;
                     case 'u':
-                        mx_printstr("option: ");
-                        mx_printchar('u');
-                        mx_printchar('\n');
+                        *flags = *flags | FLAG_u;
                         break;
                     case 'c':
-                        mx_printstr("option: ");
-                        mx_printchar('c');
-                        mx_printchar('\n');
+                        *flags = *flags | FLAG_c;
                         break;
                     case 'S':
-                        mx_printstr("option: ");
-                        mx_printchar('S');
-                        mx_printchar('\n');
+                        *flags = *flags | FLAG_S;
                         break;
                     default:
-                        mx_printerr("uls: invalid option: -");
+                        mx_printerr("uls: invalid option -- ");
                         write(STDERR_FILENO, &argv[i][j], 1);
                         mx_printchar('\n');
+                        mx_printerr("usage: ls [-l] [file ...]\n");
+                        exit(EXIT_FAILURE);
                 }
             }
         }
     }
-
-    mx_printstr("option l is defined: ");
-    if(LS_FLAGS & FLAG_l) mx_printstr("true\n");
-    else mx_printstr("false\n");
 }
-

@@ -1,11 +1,14 @@
-#include "uls.h"
 #include <errno.h>
 #include <string.h>
-
 #include <sys/types.h>
 #include <sys/acl.h>
-
 #include <sys/ioctl.h>
+#include <time.h>
+#include "uls.h"
+
+char *mx_get_time(time_t time) {
+    return mx_strndup(&ctime(&time)[4], 12);
+}
 
 DIR* mx_opendir(const char* name) {
     DIR* dir = opendir(name);
@@ -68,26 +71,7 @@ int main(int argc, char *argv[]) {
         printf("%dx%d\n", ws.ws_col, ws.ws_row);
 
         for(int i = 0; i < size; i++) {
-            // acl_t acl = acl_get_file(drent->d_name, ACL_TYPE_ACCESS);
-            // if(acl == NULL) {
-            //     mx_printerr("uls: ");
-            //     mx_printerr(drent->d_name);
-            //     mx_printerr(": ");
-            //     mx_printerr(strerror(errno));
-            //     exit(EXIT_FAILURE);
-            // }
             entries[i] = readdir(dir);
-
-            // ssize_t size = 0;
-            // char* acl_text = acl_to_text(acl, &size);
-            // if(acl_text == NULL) {
-            //     mx_printerr("uls: ");
-            //     mx_printerr(drent->d_name);
-            //     mx_printerr(": ");
-            //     mx_printerr(strerror(errno));
-            //     exit(EXIT_FAILURE);
-            // }
-            // printf(" %s\n", acl_text);
         }
         mx_sort_entries(entries, size);
         
@@ -99,8 +83,12 @@ int main(int argc, char *argv[]) {
 
         closedir(dir);
     }
-
-    mx_check_flags(argc, argv, 0);
+    else {
+        unsigned short flags = 0;
+        mx_check_flags(argc, argv, &flags);
+        mx_printstr("options defined: ");
+        (flags & 0xFFFF) ? mx_printstr("true\n") : mx_printstr("false\n");
+    }
     
     return EXIT_SUCCESS;
 }
