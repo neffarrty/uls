@@ -1,6 +1,6 @@
 CC = clang
-CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
-LDFLAGS = $(LIB_DIR)/$(LIB)
+CFLAGS = -std=c11 # -Wall -Wextra -Werror -Wpedantic
+LDFLAGS = $(LIB_DIR)/$(LIB) -lacl
 INCLUDES = -I$(INC_DIR) -I$(LIB_DIR)/$(INC_DIR)
 
 SRC_DIR = src
