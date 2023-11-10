@@ -48,8 +48,6 @@ int main(int argc, char *argv[]) {
         dir = mx_opendir(".");
 
         struct winsize ws;
-        int sizeof_output = 0;
-        int num_of_files = 0;
         ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
         printf("window width: %d\n", ws.ws_col);
 
