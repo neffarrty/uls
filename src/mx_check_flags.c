@@ -1,6 +1,8 @@
 #include "uls.h"
 
-void mx_check_flags(int argc, char *argv[], unsigned short *flags) {
+int mx_check_flags(int argc, char *argv[], unsigned short *flags) {
+    int count_args = 0;
+
     for(int i = 1; i < argc; i++) {
         if(argv[i][0] == '-') {
             for(int j = 1; j < mx_strlen(argv[i]); j++) {
@@ -61,5 +63,11 @@ void mx_check_flags(int argc, char *argv[], unsigned short *flags) {
                 }
             }
         }
+        else {
+            count_args++;
+        }
     }
+
+    return count_args;
 }
+

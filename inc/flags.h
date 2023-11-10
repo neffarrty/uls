@@ -1,10 +1,10 @@
 #ifndef FLAGS_H
 #define FLAGS_H
 
-void mx_check_flags(int argc, char *argv[], unsigned short *flags);
+int mx_check_flags(int argc, char *argv[], unsigned short *flags);
 
-#define FLAG_l 1 << 0 
-#define FLAG_R 1 << 1
+#define FLAG_l 1 << 0 // 0000 0000 0000 0001
+#define FLAG_R 1 << 1 // 0000 0000 0000 0010
 #define FLAG_A 1 << 2
 #define FLAG_a 1 << 3
 #define FLAG_G 1 << 4
@@ -21,3 +21,4 @@ void mx_check_flags(int argc, char *argv[], unsigned short *flags);
 #define FLAG_S 1 << 15
 
 #endif
+
