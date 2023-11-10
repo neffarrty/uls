@@ -4,6 +4,19 @@ char *mx_get_time_str(time_t time) {
     return mx_strndup(&ctime(&time)[4], 12);
 }
 
+int mx_max_length(char **arr, int size) {
+    int max = mx_strlen(arr[0]);
+    
+    for(int i = 1; i < size; i++) {
+        int length = mx_strlen(arr[i]);
+        if(length > max) {
+            max = length;
+        }
+    }
+
+    return max;
+}
+
 void mx_sort_entries(struct dirent **entries, int size) {
 	int isSorted = 0;
 	
@@ -47,24 +60,26 @@ int main(int argc, char *argv[]) {
         }
         mx_bubble_sort(names, size);
         
-        for(int i = 0; i < size; i++) {
-            if(names[i][0] != '.') {
-                sizeof_output += mx_strlen(names[i]);
-                num_of_files++;
-            }
-        }
-        int tab = sizeof_output / (num_of_files - 1);
-        printf("%d / %d = %d\n", sizeof_output, num_of_files - 1, tab);
+        // for(int i = 0; i < size; i++) {
+        //     if(names[i][0] != '.') {
+        //         sizeof_output += mx_strlen(names[i]);
+        //         num_of_files++;
+        //     }
+        // }
+        // int tab = sizeof_output / (num_of_files - 1);
+        // printf("%d / %d = %d\n", sizeof_output, num_of_files - 1, tab);
+
+        int tab = mx_max_length(names, size);
 
         for(int i = 0; i < size; i++) {
             if(names[i][0] != '.') {
                 mx_printstr(names[i]);
                 if(mx_strlen(names[i]) < 8) {
-                    for(int j = 0; j <= 8 - mx_strlen(names[i]); j++) {
+                    for(int j = 0; j < tab - mx_strlen(names[i]); j++) {
                         mx_printstr(" ");
                     }
                 }
-                for(int j = 0; j <= tab; j++) {
+                for(int j = 0; j < tab; j++) {
                         mx_printstr(" ");
                 }
             }
