@@ -34,6 +34,12 @@ int main(int argc, char *argv[]) {
         size = mx_count_dir_size(".");
         dir = mx_opendir(".");
 
+        struct winsize ws;
+        int sizeof_output = 0;
+        int num_of_files = 0;
+        ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
+        printf("window width: %d\n", ws.ws_col);
+
         names = (char**)malloc(size * sizeof(char*));
 
         for(int i = 0; (entry = readdir(dir)) != NULL; i++) {
@@ -43,8 +49,24 @@ int main(int argc, char *argv[]) {
         
         for(int i = 0; i < size; i++) {
             if(names[i][0] != '.') {
+                sizeof_output += mx_strlen(names[i]);
+                num_of_files++;
+            }
+        }
+        int tab = sizeof_output / (num_of_files - 1);
+        printf("%d / %d = %d\n", sizeof_output, num_of_files - 1, tab);
+
+        for(int i = 0; i < size; i++) {
+            if(names[i][0] != '.') {
                 mx_printstr(names[i]);
-                mx_printstr("\t\t");
+                if(mx_strlen(names[i]) < 8) {
+                    for(int j = 0; j <= 8 - mx_strlen(names[i]); j++) {
+                        mx_printstr(" ");
+                    }
+                }
+                for(int j = 0; j <= tab; j++) {
+                        mx_printstr(" ");
+                }
             }
         }
         mx_printstr("\n");
