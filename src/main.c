@@ -1,8 +1,6 @@
 #include "../inc/uls.h"
 
 int main(int argc, char *argv[]) {  
-    printf("Hello World\n");
-    
     unsigned short flags = 0;
     mx_check_flags(argc, argv, &flags);
     
