@@ -1,44 +1,10 @@
-#include "uls.h"
-
-char *mx_get_time_str(time_t time) {
-    return mx_strndup(&ctime(&time)[4], 12);
-}
-
-int mx_max_length(char **arr, int size) {
-    int max = mx_strlen(arr[0]);
-    
-    for(int i = 1; i < size; i++) {
-        int length = mx_strlen(arr[i]);
-        if(length > max) {
-            max = length;
-        }
-    }
-
-    return max;
-}
-
-void mx_sort_entries(struct dirent **entries, int size) {
-	int isSorted = 0;
-	
-	while(!isSorted) {
-		isSorted = 1;
-		for(int i = 0; i < size - 1; i++) {
-			if(mx_strcmp(entries[i]->d_name, entries[i + 1]->d_name) > 0) {
-				isSorted = 0;
-				
-				struct dirent* tmp = entries[i];
-				entries[i] = entries[i + 1];
-				entries[i + 1] = tmp;
-			}
-		}
-	}
-}
+#include "../inc/uls.h"
 
 int main(int argc, char *argv[]) {  
     unsigned short flags = 0;
-    int num_of_files = mx_check_flags(argc, argv, &flags);
+    mx_check_flags(argc, argv, &flags);
     
-    if(num_of_files == 0 && !(flags & 0xFFFF)) {
+    if(argc == 1) {
         DIR* dir = NULL;
         char **names = NULL;
         struct dirent *entry = NULL;
@@ -49,7 +15,6 @@ int main(int argc, char *argv[]) {
 
         struct winsize ws;
         ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
-        printf("window width: %d\n", ws.ws_col);
 
         names = (char**)malloc(size * sizeof(char*));
 
@@ -67,25 +32,30 @@ int main(int argc, char *argv[]) {
         // int tab = sizeof_output / (num_of_files - 1);
         // printf("%d / %d = %d\n", sizeof_output, num_of_files - 1, tab);
 
-        int tab = mx_max_length(names, size);
+        // int tab = mx_max_name_length(names, size);
 
-        for(int i = 0; i < size; i++) {
-            if(names[i][0] != '.') {
-                mx_printstr(names[i]);
-                if(mx_strlen(names[i]) < 8) {
-                    for(int j = 0; j < tab - mx_strlen(names[i]); j++) {
-                        mx_printstr(" ");
-                    }
-                }
-                for(int j = 0; j < tab; j++) {
-                        mx_printstr(" ");
-                }
-            }
-        }
+        // for(int i = 0; i < size; i++) {
+        //     if(names[i][0] != '.') {
+        //         mx_printstr(names[i]);
+        //         mx_printnchar(' ', tab + (tab - mx_strlen(names[i])));
+        //     }
+        // }
         mx_printstr("\n");
 
         closedir(dir);
     }
+    else {
+        if(flags & FLAG_R) {
+            mx_print_dir(".");
+        }
+    }
+
+    // char *arr[8] = {
+    //     "A", "B", "C",
+    //     "D", "E", "F",
+    //     "G", "H"
+    // };
+    // mx_print_in_cols(arr, 8, 3);
     
     return EXIT_SUCCESS;
 }
