@@ -27,26 +27,26 @@ TARGET = uls
 all: $(LIB) $(TARGET)
 
 $(LIB):
-	make -C $(LIB_DIR)
+	@make -C $(LIB_DIR)
 
 $(TARGET): $(OBJ)
-	$(CC) $(CFLAGS) $(INCLUDES) $^ $(LDFLAGS) -o $@
+	@$(CC) $(CFLAGS) $(INCLUDES) $^ $(LDFLAGS) -o $@
 
 $(OBJ): $(SRC)
-	mkdir $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $^
-	mv *.o $(OBJ_DIR)
+	@mkdir $(OBJ_DIR)
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $^
+	@mv *.o $(OBJ_DIR)
 
 clean:
-	rm -rf $(OBJ_DIR)
-	make -C $(LIB_DIR) clean
+	@rm -rf $(OBJ_DIR)
+	@make -C $(LIB_DIR) clean
 
 uninstall:
-	rm -f $(TARGET)
-	make -C $(LIB_DIR) uninstall
+	@rm -f $(TARGET)
+	@make -C $(LIB_DIR) uninstall
 
 reinstall: clean uninstall
-	make -C $(LIB_DIR) reinstall
-	make all
+	@make -C $(LIB_DIR) reinstall
+	@make all
 
 
