@@ -3,59 +3,67 @@
 int main(int argc, char *argv[]) {  
     unsigned short flags = 0;
     mx_check_flags(argc, argv, &flags);
-    
-    if(argc == 1) {
-        DIR* dir = NULL;
-        char **names = NULL;
-        struct dirent *entry = NULL;
-        int size = 0;
-        
-        size = mx_count_dir_size(".");
-        dir = mx_opendir(".");
 
-        struct winsize ws;
-        ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
+    if(argc > 3) {
+        int files_size = 0;
+        int dirs_size = 0;
 
-        names = (char**)malloc(size * sizeof(char*));
-
-        for(int i = 0; (entry = readdir(dir)) != NULL; i++) {
-            names[i] = mx_strdup(entry->d_name);
+        for(int i = 1; i < argc; i++) {
+            if(argv[i][0] != '-') {
+                struct stat buf;
+                int res = stat(argv[i], &buf);
+                if(res == -1) {
+                    mx_printerr("uls: ");
+                    mx_printerr(argv[i]);
+                    mx_printerr(": ");
+                    mx_printerr(strerror(errno));
+                }
+                else {
+                    if(S_ISDIR(buf.st_mode)) {
+                        dirs_size++;
+                    }
+                    else {
+                        files_size++;
+                    }
+                }
+            }
         }
-        mx_bubble_sort(names, size);
-        
-        // for(int i = 0; i < size; i++) {
-        //     if(names[i][0] != '.') {
-        //         sizeof_output += mx_strlen(names[i]);
-        //         num_of_files++;
-        //     }
-        // }
-        // int tab = sizeof_output / (num_of_files - 1);
-        // printf("%d / %d = %d\n", sizeof_output, num_of_files - 1, tab);
+        t_fileinfo *files = (t_fileinfo*)malloc(files_size * sizeof(t_fileinfo));
+        t_fileinfo *dirs = (t_fileinfo*)malloc(dirs_size * sizeof(t_fileinfo));
 
-        // int tab = mx_max_name_length(names, size);
+        int i = 0;
+        int j = 0;
+        for(int k = 1; k < argc; k++) {
+            if(argv[k][0] != '-') {
+                struct stat buf;
+                int res = stat(argv[k], &buf);
+                if(res != -1) {
+                    if(S_ISDIR(buf.st_mode)) {
+                        dirs[i].name = mx_strdup(argv[k]);
+                        stat(argv[k], &dirs[i].st);
+                        i++;
+                    }
+                    else {
+                        files[j].name = mx_strdup(argv[k]);
+                        stat(argv[k], &files[j].st);
+                        j++;
+                    }
+                }
+            }
+        }
+        mx_sort_files(files, files_size, flags);
+        mx_sort_files(dirs, dirs_size, flags);
 
-        // for(int i = 0; i < size; i++) {
-        //     if(names[i][0] != '.') {
-        //         mx_printstr(names[i]);
-        //         mx_printnchar(' ', tab + (tab - mx_strlen(names[i])));
-        //     }
-        // }
-        mx_printstr("\n");
+        mx_print_in_cols(files, files_size);
 
-        closedir(dir);
+        for(int i = 0; i < dirs_size; i++) {
+            mx_printchar('\n');
+            mx_print_dir(dirs[i].name, flags);
+        }
     }
     else {
-        if(flags & FLAG_R) {
-            mx_print_dir(".");
-        }
+        mx_print_dir(".", flags);
     }
-
-    // char *arr[8] = {
-    //     "A", "B", "C",
-    //     "D", "E", "F",
-    //     "G", "H"
-    // };
-    // mx_print_in_cols(arr, 8, 3);
     
     return EXIT_SUCCESS;
 }
