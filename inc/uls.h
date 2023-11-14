@@ -14,6 +14,7 @@
 #include <limits.h>
 #include <grp.h>
 #include <pwd.h>
+#include <sys/xattr.h>
 
 typedef struct s_fileinfo {
     char *name;
@@ -51,6 +52,12 @@ void mx_long_output(t_fileinfo files[], int size);
 char *mx_concat_dirs(char* fst, char* scd);
 
 int mx_count_cols(int max);
+
+void mx_print_link(const char *name);
+
+char mx_get_file_type(mode_t mode);
+
+char* mx_get_permissions(t_fileinfo file);
 
 #endif
 

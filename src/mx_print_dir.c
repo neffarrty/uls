@@ -26,7 +26,7 @@ void mx_print_dir(char* name, int flags) {
         char *path = mx_concat_dirs(name, entry->d_name);
 
         files[i].name = mx_strdup(entry->d_name);
-        stat(path, &files[i].st);
+        lstat(path, &files[i].st);
         i++;
         
         free(path);
@@ -45,7 +45,7 @@ void mx_print_dir(char* name, int flags) {
                 char *path = mx_concat_dirs(name, files[i].name);
                 struct stat st;
 
-                stat(path, &st);
+                lstat(path, &st);
                 if(S_ISDIR(st.st_mode) && mx_dir_size(path, flags) != 0) {
                     mx_printchar('\n');
                     mx_print_dir(path, flags);

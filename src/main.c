@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
         for(int i = 1; i < argc; i++) {
             if(argv[i][0] != '-') {
                 struct stat buf;
-                int res = stat(argv[i], &buf);
+                int res = lstat(argv[i], &buf);
                 if(res == -1) {
                     mx_printerr("uls: ");
                     mx_printerr(argv[i]);
@@ -37,17 +37,17 @@ int main(int argc, char *argv[]) {
         for(int k = 1; k < argc; k++) {
             if(argv[k][0] != '-') {
                 struct stat buf;
-                int res = stat(argv[k], &buf);
+                int res = lstat(argv[k], &buf);
                 
                 if(res != -1) {
                     if(S_ISDIR(buf.st_mode)) {
                         dirs[i].name = mx_strdup(argv[k]);
-                        stat(argv[k], &dirs[i].st);
+                        lstat(argv[k], &dirs[i].st);
                         i++;
                     }
                     else {
                         files[j].name = mx_strdup(argv[k]);
-                        stat(argv[k], &files[j].st);
+                        lstat(argv[k], &files[j].st);
                         j++;
                     }
                 }

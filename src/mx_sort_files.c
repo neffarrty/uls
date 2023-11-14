@@ -36,5 +36,19 @@ void mx_sort_files(t_fileinfo files[], int size, int flags) {
 			}
 		}
 	}
+	// isSorted = 0;
+	// while(!isSorted) {
+	// 	isSorted = 1;
+
+	// 	for(int i = 0; i < size - 1; i++) {
+	// 		if(mx_cmp_name(files[i], files[i + 1])) {
+	// 			isSorted = 0;
+				
+	// 			t_fileinfo buff = files[i];
+	// 			files[i] = files[i + 1];
+	// 			files[i + 1] = buff;
+	// 		}
+	// 	}
+	// }
 }
 
