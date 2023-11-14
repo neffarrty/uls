@@ -17,6 +17,7 @@ int main(int argc, char *argv[]) {
                     mx_printerr(argv[i]);
                     mx_printerr(": ");
                     mx_printerr(strerror(errno));
+                    mx_printchar('\n');
                 }
                 else {
                     if(S_ISDIR(buf.st_mode)) {

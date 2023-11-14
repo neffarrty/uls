@@ -30,9 +30,12 @@ void mx_print_dir(char* name, int flags) {
         free(path);
     }
     mx_sort_files(files, size, flags);
-
-    mx_printstr(name);
-    mx_printstr(":\n");
+    
+    if (mx_strcmp(name,".") != 0){
+            mx_printstr(name);
+            mx_printstr(":\n");
+    }
+    
     mx_print_in_cols(files, size);
 
     if(flags & FLAG_R) {
