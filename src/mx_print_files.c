@@ -1,9 +1,10 @@
 #include "../inc/uls.h"
 
-void mx_print_files(t_fileinfo arr[], int size) {
+void mx_print_files(t_fileinfo arr[], int size, int flags) {
     int max = mx_max_name_length(arr, size);
     struct winsize ws;
     ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
+    
     int cols = 0;
     if(ws.ws_col  % (max + 2) == 0){
         cols = ws.ws_col / (max + 8);
@@ -16,7 +17,8 @@ void mx_print_files(t_fileinfo arr[], int size) {
     if(size % cols != 0) {
         rows += 1;
     }
-    if(!isatty(STDOUT_FILENO)){
+
+    if(!isatty(STDOUT_FILENO) || flags & FLAG_1){
        for(int i = 0; i < size; i++){
             mx_printstr(arr[i].name);
             mx_printchar('\n');

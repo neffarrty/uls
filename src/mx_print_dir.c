@@ -5,7 +5,7 @@ void mx_print_dir(char* name, int flags) {
     struct s_fileinfo *files = NULL;
     struct dirent *entry = NULL;
     int size = 0;
-        
+
     size = mx_dir_size(name, flags);
     dir = mx_opendir(name);
 
@@ -19,30 +19,32 @@ void mx_print_dir(char* name, int flags) {
             }
         } 
         else if(entry->d_name[0] == '.') {
-            if(!(flags & FLAG_A) || !(flags & FLAG_A)) {
+            if(!(flags & (FLAG_a | FLAG_A))) {
                 continue;
             }
         }
         char *path = mx_concat_dirs(name, entry->d_name);
+
         files[i].name = mx_strdup(entry->d_name);
         stat(path, &files[i].st);
         i++;
+        
         free(path);
     }
     mx_sort_files(files, size, flags);
     
-    if (mx_strcmp(name,".") != 0){
-            mx_printstr(name);
-            mx_printstr(":\n");
+    if(mx_strcmp(name, ".") != 0){
+        mx_printstr(name);
+        mx_printstr(":\n");
     }
-    mx_long_output(files,size);
-    mx_print_files(files, size);
+    mx_print_files(files, size, flags);
 
     if(flags & FLAG_R) {
         for(int i = 0; i < size; i++) {
             if(mx_strcmp(files[i].name, ".") != 0 && mx_strcmp(files[i].name, "..") != 0) {
                 char *new_name = mx_concat_dirs(name, files[i].name);
                 struct stat st;
+
                 stat(new_name, &st);
                 if(S_ISDIR(st.st_mode) && mx_dir_size(new_name, flags) != 0) {
                     mx_printchar('\n');
