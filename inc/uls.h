@@ -28,7 +28,7 @@ void mx_printnchar(char c, int n);
 
 void mx_print_dir(char* name, int flags);
 
-void mx_print_in_cols(t_fileinfo arr[], int size);
+void mx_print_files(t_fileinfo arr[], int size);
 
 void mx_sort_files(t_fileinfo arr[], int size, int flags);
 

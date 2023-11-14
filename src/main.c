@@ -3,7 +3,6 @@
 int main(int argc, char *argv[]) {  
     unsigned short flags = 0;
     mx_check_flags(argc, argv, &flags);
-
     if(argc > 3) {
         int files_size = 0;
         int dirs_size = 0;
@@ -55,7 +54,7 @@ int main(int argc, char *argv[]) {
         mx_sort_files(files, files_size, flags);
         mx_sort_files(dirs, dirs_size, flags);
 
-        mx_print_in_cols(files, files_size);
+        mx_print_files(files, files_size);
 
         for(int i = 0; i < dirs_size; i++) {
             mx_printchar('\n');

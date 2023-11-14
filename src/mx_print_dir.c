@@ -35,8 +35,8 @@ void mx_print_dir(char* name, int flags) {
             mx_printstr(name);
             mx_printstr(":\n");
     }
-    
-    mx_print_in_cols(files, size);
+    mx_long_output(files,size);
+    mx_print_files(files, size);
 
     if(flags & FLAG_R) {
         for(int i = 0; i < size; i++) {
