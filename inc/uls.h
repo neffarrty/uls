@@ -12,6 +12,8 @@
 #include <sys/ioctl.h>
 #include <sys/stat.h>
 #include <limits.h>
+#include <grp.h>
+#include <pwd.h>
 
 typedef struct s_fileinfo {
     char *name;
