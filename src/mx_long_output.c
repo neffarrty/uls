@@ -7,6 +7,11 @@ void mx_long_output(t_fileinfo files[], int size) {
         total += files[i].st.st_blocks;
     }
 
-    printf("total: %ld\n", total);
+    printf("total %ld\n", total);
+
+    for(int i = 0; i < size; i++) {
+        mx_printstr(files[i].name);
+        mx_printchar('\n');
+    }
 }
 

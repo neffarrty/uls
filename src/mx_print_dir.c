@@ -42,16 +42,16 @@ void mx_print_dir(char* name, int flags) {
     if(flags & FLAG_R) {
         for(int i = 0; i < size; i++) {
             if(mx_strcmp(files[i].name, ".") != 0 && mx_strcmp(files[i].name, "..") != 0) {
-                char *new_name = mx_concat_dirs(name, files[i].name);
+                char *path = mx_concat_dirs(name, files[i].name);
                 struct stat st;
 
-                stat(new_name, &st);
-                if(S_ISDIR(st.st_mode) && mx_dir_size(new_name, flags) != 0) {
+                stat(path, &st);
+                if(S_ISDIR(st.st_mode) && mx_dir_size(path, flags) != 0) {
                     mx_printchar('\n');
-                    mx_print_dir(new_name, flags);
+                    mx_print_dir(path, flags);
                 }
 
-                free(new_name);
+                free(path);
             }
         }
     }

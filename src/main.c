@@ -38,6 +38,7 @@ int main(int argc, char *argv[]) {
             if(argv[k][0] != '-') {
                 struct stat buf;
                 int res = stat(argv[k], &buf);
+                
                 if(res != -1) {
                     if(S_ISDIR(buf.st_mode)) {
                         dirs[i].name = mx_strdup(argv[k]);

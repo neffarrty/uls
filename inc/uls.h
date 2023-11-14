@@ -28,9 +28,9 @@ void mx_printnchar(char c, int n);
 
 void mx_print_dir(char* name, int flags);
 
-void mx_print_files(t_fileinfo arr[], int size, int flags);
+void mx_print_files(t_fileinfo files[], int size, int flags);
 
-void mx_sort_files(t_fileinfo arr[], int size, int flags);
+void mx_sort_files(t_fileinfo files[], int size, int flags);
 
 bool mx_cmp_atime(t_fileinfo a, t_fileinfo b);
 
@@ -45,6 +45,8 @@ bool mx_cmp_rname(t_fileinfo a, t_fileinfo b);
 void mx_long_output(t_fileinfo files[], int size);
 
 char *mx_concat_dirs(char* fst, char* scd);
+
+int mx_count_cols(int max);
 
 #endif
 
