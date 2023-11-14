@@ -12,11 +12,15 @@ bool mx_cmp_mtime(t_fileinfo a, t_fileinfo b) {
     return a.st.st_mtime < b.st.st_mtime;
 }
 
-bool mx_cmp_aname(t_fileinfo a, t_fileinfo b) {
+bool mx_cmp_name(t_fileinfo a, t_fileinfo b) {
     return mx_strcmp(a.name, b.name) > 0;
 }
 
 bool mx_cmp_rname(t_fileinfo a, t_fileinfo b) {
     return mx_strcmp(a.name, b.name) < 0;
+}
+
+bool mx_cmp_size(t_fileinfo a, t_fileinfo b) {
+    return a.st.st_size < b.st.st_size;
 }
 

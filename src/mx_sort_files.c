@@ -15,8 +15,11 @@ void mx_sort_files(t_fileinfo files[], int size, int flags) {
 	else if(flags & FLAG_c) {
 		cmp = mx_cmp_ctime;
 	}
+	else if(flags & FLAG_S) {
+		cmp = mx_cmp_size;
+	}
 	else {
-		cmp = mx_cmp_aname;
+		cmp = mx_cmp_name;
 	}
 
     int isSorted = 0;

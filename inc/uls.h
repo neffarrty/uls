@@ -38,9 +38,11 @@ bool mx_cmp_ctime(t_fileinfo a, t_fileinfo b);
 
 bool mx_cmp_mtime(t_fileinfo a, t_fileinfo b);
 
-bool mx_cmp_aname(t_fileinfo a, t_fileinfo b);
-
 bool mx_cmp_rname(t_fileinfo a, t_fileinfo b);
+
+bool mx_cmp_name(t_fileinfo a, t_fileinfo b);
+
+bool mx_cmp_size(t_fileinfo a, t_fileinfo b);
 
 void mx_long_output(t_fileinfo files[], int size);
 
