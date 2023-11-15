@@ -29,7 +29,7 @@ char* mx_get_permissions(t_fileinfo file) {
         res[6] = (file.st.st_mode & S_IXGRP) ? 's' : 'S';
     }
     if(file.st.st_mode & S_ISVTX) {
-        res[6] = (file.st.st_mode & S_IXOTH) ? 't' : 'T';
+        res[9] = (file.st.st_mode & S_IXOTH) ? 't' : 'T';
     }
 
     return res;

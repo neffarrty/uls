@@ -59,7 +59,7 @@ char mx_get_file_type(mode_t mode);
 
 char* mx_get_permissions(t_fileinfo file);
 
-int mx_find_max_element_in_info(char*** info, int iterator, int size);
+int mx_max_element(char*** info, int size, int col);
 
 #endif
 
