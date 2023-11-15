@@ -4,7 +4,7 @@ int main(int argc, char *argv[]) {
     unsigned short flags = 0;
     mx_check_flags(argc, argv, &flags);
     
-    if(argc > 3) {
+    if(argc > 2) {
         int files_size = 0;
         int dirs_size = 0;
 
@@ -53,12 +53,16 @@ int main(int argc, char *argv[]) {
                 }
             }
         }
+
         mx_sort_files(files, files_size, flags);
         mx_sort_files(dirs, dirs_size, flags);
-
-        mx_print_files(files, files_size, flags);
+        if(files_size > 0){
+            mx_print_files(files, files_size, flags);
+        }
         for(int i = 0; i < dirs_size; i++) {
-            mx_printchar('\n');
+            if( i != 0 || files_size > 0){
+                mx_printchar('\n');
+            }
             mx_print_dir(dirs[i].name, flags);
         }
     }

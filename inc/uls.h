@@ -19,6 +19,7 @@
 typedef struct s_fileinfo {
     char *name;
     struct stat st;
+    char *path;
 }              t_fileinfo;
 
 DIR* mx_opendir(const char* name);
@@ -53,13 +54,15 @@ char *mx_concat_dirs(char* fst, char* scd);
 
 int mx_count_cols(int max);
 
-void mx_print_link(const char *name);
+void mx_print_link(const char *path);
 
 char mx_get_file_type(mode_t mode);
 
 char* mx_get_permissions(t_fileinfo file);
 
 int mx_max_element(char*** info, int size, int col);
+
+char mx_print_color_name(t_fileinfo file);
 
 #endif
 

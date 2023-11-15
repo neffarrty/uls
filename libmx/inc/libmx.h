@@ -56,6 +56,8 @@ int mx_strncmp(const char *s1, const char *s2, int n);
 
 int mx_quicksort(char **arr, int left, int right);
 
+void mx_printlong(long long n);
+
 // STRING PACK
 
 void mx_swap_char(char* s1, char* s2);

@@ -23,13 +23,11 @@ void mx_print_dir(char* name, int flags) {
                 continue;
             }
         }
-        char *path = mx_concat_dirs(name, entry->d_name);
+        files[i].path = mx_concat_dirs(name, entry->d_name);
 
         files[i].name = mx_strdup(entry->d_name);
-        lstat(path, &files[i].st);
+        lstat(files[i].path, &files[i].st);
         i++;
-        
-        free(path);
     }
     mx_sort_files(files, size, flags);
     
@@ -58,6 +56,7 @@ void mx_print_dir(char* name, int flags) {
 
     for(int i = 0; i < size; i++) {
         free(files[i].name);
+        free(files[i].path);
     }
     free(files);
 

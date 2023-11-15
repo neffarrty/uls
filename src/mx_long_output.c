@@ -22,8 +22,13 @@ void mx_long_output(t_fileinfo files[], int size) {
         info[i][6] = mx_strdup(file.name);
         total += file.st.st_blocks;
     }
+    if (size > 1){
+        mx_printstr("total ");
+        mx_printlong(total);
+        mx_printchar('\n');
+    }
 
-    printf("total %lld\n", total);
+
     for(int i = 0; i < size; i++) {
         mx_printstr(info[i][0]);
         mx_printnchar(' ', mx_max_element(info, size, 1) - mx_strlen(info[i][1]) + 1);
@@ -45,10 +50,22 @@ void mx_long_output(t_fileinfo files[], int size) {
         
         mx_printstr(info[i][6]);
         if((files[i].st.st_mode & S_IFMT) == S_IFLNK){
-            mx_print_link(files[i].name);
+            mx_print_link(files[i].path);
         }
         mx_printchar('\n');
+        char xattr_name[XATTR_MAXNAMELEN];
+        ssize_t xattr = listxattr(files[i].path, xattr_name, XATTR_MAXNAMELEN, XATTR_NOFOLLOW);
+        if(xattr > 0) {
+            int len = getxattr(files[i].path, xattr_name, NULL, 0,0,XATTR_NOFOLLOW);
+            mx_printchar('\t'); 
+            mx_printstr(xattr_name);
+            mx_printchar('\t'); 
+            mx_printint(len);
+            mx_printchar('\n');
+        }
+
     }
+    
 
     // for(int i = 0 ; i < size; i++) {
     //     for(int j = 0 ; j < 7; j++) {
