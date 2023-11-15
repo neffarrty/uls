@@ -28,17 +28,30 @@ void mx_long_output(t_fileinfo files[], int size) {
 
     printf("total %lld\n", total);
 
+    int max0 = mx_find_max_element_in_info(info,0,size);
+    int max1 = mx_find_max_element_in_info(info,1,size);
+    int max2 = mx_find_max_element_in_info(info,2,size);
+    int max3 = mx_find_max_element_in_info(info,3,size);
+    int max4 = mx_find_max_element_in_info(info,4,size);
+    int max5 = mx_find_max_element_in_info(info,5,size);
+
     for(int i = 0; i < size; i++) {
+        mx_printnchar(' ', max0 - mx_strlen(info[i][0]));
         mx_printstr(info[i][0]);
         mx_printchar(' ');
+        mx_printnchar(' ', max1 - mx_strlen(info[i][1]));
         mx_printstr(info[i][1]);
         mx_printchar(' ');
+        mx_printnchar(' ', max2 - mx_strlen(info[i][2]));
         mx_printstr(info[i][2]);
-        mx_printchar(' ');
+        mx_printnchar(' ',2);
+        mx_printnchar(' ', max3 - mx_strlen(info[i][3]));
         mx_printstr(info[i][3]);
-        mx_printchar(' ');
+        mx_printnchar(' ',2);
+        mx_printnchar(' ', max4 - mx_strlen(info[i][4]));
         mx_printstr(info[i][4]);
         mx_printchar(' ');
+        mx_printnchar(' ', max5 - mx_strlen(info[i][5]));
         mx_printstr(info[i][5]);
         mx_printchar(' ');
         mx_printstr(info[i][6]);
