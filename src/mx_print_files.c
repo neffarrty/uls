@@ -1,6 +1,6 @@
 #include "../inc/uls.h"
 
-void mx_print_files(t_fileinfo files[], int size, int flags) {
+void mx_print_files(t_fileinfo files[], int size, unsigned short flags) {
     int max = mx_max_name_length(files, size);
     int cols = mx_count_cols(max);
 
@@ -16,7 +16,7 @@ void mx_print_files(t_fileinfo files[], int size, int flags) {
        }
     }
     else if(flags & FLAG_l) {
-        mx_long_output(files, size);
+        mx_long_output(files, size, flags);
     }
     else {
         for(int i = 0; i < rows; i++) {

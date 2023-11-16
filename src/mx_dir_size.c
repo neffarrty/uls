@@ -1,6 +1,6 @@
 #include "../inc/uls.h"
 
-int mx_dir_size(char* path, int flags) {
+int mx_dir_size(char* path, unsigned short flags) {
     DIR* dir = NULL;
     struct dirent *entry = NULL;
     int size = 0;

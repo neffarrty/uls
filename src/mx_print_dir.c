@@ -1,6 +1,6 @@
 #include "../inc/uls.h"
 
-void mx_print_dir(char* name, int flags) {
+void mx_print_dir(char* name, unsigned short flags) {
     DIR* dir = NULL;
     struct s_fileinfo *files = NULL;
     struct dirent *entry = NULL;

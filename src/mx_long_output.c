@@ -1,6 +1,6 @@
 #include "../inc/uls.h"
 
-void mx_long_output(t_fileinfo files[], int size) {
+void mx_long_output(t_fileinfo files[], int size, unsigned char flags) {
     blkcnt_t total = 0;
 
     char*** info = (char***)malloc(size * sizeof(char**));
@@ -22,7 +22,7 @@ void mx_long_output(t_fileinfo files[], int size) {
         info[i][6] = mx_strdup(file.name);
         total += file.st.st_blocks;
     }
-    if (size > 1){
+    if(size > 1){
         mx_printstr("total ");
         mx_printlong(total);
         mx_printchar('\n');
@@ -53,6 +53,7 @@ void mx_long_output(t_fileinfo files[], int size) {
             mx_print_link(files[i].path);
         }
         mx_printchar('\n');
+
         // char xattr_name[XATTR_MAXNAMELEN];
         // ssize_t xattr = listxattr(files[i].path, xattr_name, XATTR_MAXNAMELEN, XATTR_NOFOLLOW);
         // if(xattr > 0) {
@@ -63,22 +64,11 @@ void mx_long_output(t_fileinfo files[], int size) {
         //     mx_printint(len);
         //     mx_printchar('\n');
         // }
-        int len_of_atribute = listxattr(files[i].path,NULL,0,XATTR_NOFOLLOW);
-        char* list = malloc(len_of_atribute);
-        ssize_t xattr = listxattr(files[i].path, list, XATTR_MAXNAMELEN, XATTR_NOFOLLOW);
-        if(xattr > 0) {
-            for(char *list1 = list; list1 < list + xattr; list1 += strlen(list1)+1){
-                int len = getxattr(files[i].path, list1, NULL, 0,0,XATTR_NOFOLLOW);
-                mx_printchar('\t'); 
-                mx_printstr(list1);
-                mx_printchar('\t'); 
-                mx_printint(len);
-                mx_printchar('\n');
-            }
-        }
 
+        if(flags & FLAG_AT) {
+            mx_print_xattr(files[i].path);
+        }
     }
-    
 
     // for(int i = 0 ; i < size; i++) {
     //     for(int j = 0 ; j < 7; j++) {
