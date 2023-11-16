@@ -19,7 +19,7 @@ void mx_print_files(t_fileinfo files[], int size, unsigned short flags) {
         mx_long_output(files, size, flags);
     }
     else {
-        for(int i = 0; i < rows; i++) {
+        for(int i = 0; i < rows && size > 0; i++) {
             for(int j = 0; j < cols; j++) {
                 int index = i + j * rows;
                 if(index < size ) {

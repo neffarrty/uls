@@ -59,7 +59,7 @@ int main(int argc, char *argv[]) {
         if(files_size > 0){
             mx_print_files(files, files_size, flags);
         }
-        for(int i = 0; i < dirs_size; i++) {
+        for(int i = 0; i < dirs_size && dirs_size > 1; i++) {
             if( i != 0 || files_size > 0){
                 mx_printchar('\n');
             }

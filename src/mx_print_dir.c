@@ -44,7 +44,7 @@ void mx_print_dir(char* name, unsigned short flags) {
                 struct stat st;
 
                 lstat(path, &st);
-                if(S_ISDIR(st.st_mode) && mx_dir_size(path, flags) != 0) {
+                if((st.st_mode & S_IFMT) == S_IFDIR) {
                     mx_printchar('\n');
                     mx_print_dir(path, flags);
                 }
