@@ -34,7 +34,7 @@ void mx_printnchar(char c, int n);
 
 void mx_print_dir(char* name, unsigned short flags);
 
-void mx_print_files(t_fileinfo files[], int size, unsigned short flags);
+void mx_print_files(t_fileinfo files[], int size, unsigned short flags, bool is_dir);
 
 void mx_sort_files(t_fileinfo files[], int size, unsigned short flags);
 
@@ -50,7 +50,7 @@ bool mx_cmp_name(t_fileinfo a, t_fileinfo b);
 
 bool mx_cmp_size(t_fileinfo a, t_fileinfo b);
 
-void mx_long_output(t_fileinfo files[], int size, unsigned short flags);
+void mx_long_output(t_fileinfo files[], int size, unsigned short flags, bool is_dir);
 
 char *mx_concat_dirs(char* fst, char* scd);
 

@@ -1,6 +1,6 @@
 #include "../inc/uls.h"
 
-void mx_long_output(t_fileinfo files[], int size, unsigned short flags) {
+void mx_long_output(t_fileinfo files[], int size, unsigned short flags, bool is_dir) {
     blkcnt_t total = 0;
 
     char*** info = (char***)malloc(size * sizeof(char**));
@@ -22,12 +22,11 @@ void mx_long_output(t_fileinfo files[], int size, unsigned short flags) {
         info[i][6] = mx_strdup(file.name);
         total += file.st.st_blocks;
     }
-    if(size > 1){
+    if(is_dir) {
         mx_printstr("total ");
         mx_printlong(total);
         mx_printchar('\n');
     }
-
 
     for(int i = 0; i < size; i++) {
         mx_printstr(info[i][0]);
@@ -47,7 +46,7 @@ void mx_long_output(t_fileinfo files[], int size, unsigned short flags) {
 
         mx_printstr(info[i][5]);
         mx_printchar(' ');
-        
+
         if(flags & FLAG_G ){
             mx_print_color_name(files[i]);
         }
@@ -76,12 +75,12 @@ void mx_long_output(t_fileinfo files[], int size, unsigned short flags) {
         }
     }
 
-    // for(int i = 0 ; i < size; i++) {
-    //     for(int j = 0 ; j < 7; j++) {
-    //         free(info[i][j]);
-    //     }
-    //     free(info[i]);
-    // }
-    // free(info);
+    for(int i = 0 ; i < size; i++) {
+        for(int j = 0 ; j < 7; j++) {
+            free(info[i][j]);
+        }
+        free(info[i]);
+    }
+    free(info);
 }
 

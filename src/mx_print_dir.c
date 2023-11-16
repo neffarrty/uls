@@ -35,7 +35,7 @@ void mx_print_dir(char* name, unsigned short flags) {
         mx_printstr(name);
         mx_printstr(":\n");
     }
-    mx_print_files(files, size, flags);
+    mx_print_files(files, size, flags, true);
 
     if(flags & FLAG_R) {
         for(int i = 0; i < size; i++) {
