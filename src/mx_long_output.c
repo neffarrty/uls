@@ -48,7 +48,13 @@ void mx_long_output(t_fileinfo files[], int size, unsigned short flags) {
         mx_printstr(info[i][5]);
         mx_printchar(' ');
         
-        mx_printstr(info[i][6]);
+        if(flags & FLAG_G ){
+            mx_print_color_name(files[i]);
+        }
+        else {
+            mx_printstr(info[i][6]);
+        }
+
         if((files[i].st.st_mode & S_IFMT) == S_IFLNK){
             mx_print_link(files[i].path);
         }
