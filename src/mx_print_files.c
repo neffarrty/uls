@@ -2,7 +2,17 @@
 
 void mx_print_files(t_fileinfo files[], int size, unsigned short flags) {
     int max = mx_max_name_length(files, size);
-    int cols = mx_count_cols(max);
+    int cols = 0;
+    
+    struct winsize ws;
+    ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
+    if(flags & FLAG_G){
+        cols  = ws.ws_col / (max);
+    }
+    else {
+        cols = mx_count_cols(max);
+    }
+
 
     int rows = size / cols;
     if(size % cols != 0) {
@@ -32,7 +42,12 @@ void mx_print_files(t_fileinfo files[], int size, unsigned short flags) {
                     mx_printnchar(' ', max - mx_strlen(files[index].name));
                 }
                 if(j != cols - 1) {
-                    mx_printchar('\t');
+                    if(flags & FLAG_G){
+                        mx_printchar(' ');
+                    }
+                    else{
+                        mx_printchar('\t');
+                    }
                 }
             }
             mx_printchar('\n');

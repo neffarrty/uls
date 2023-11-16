@@ -12,6 +12,6 @@
 #define WHT   "\x1B[37m"
 #define RESET "\x1B[0m"
 
-void mx_print_color_name(t_fileinfo file);
-
 #endif
+
+

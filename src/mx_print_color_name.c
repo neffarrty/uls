@@ -18,7 +18,7 @@ void mx_print_color_name(t_fileinfo file) {
             mx_printstr(GRN);
             break;
         case S_IFIFO:
-            mx_printstr(GRN); //brown
+            mx_printstr(YEL); //brown
             break;
         default:
             if(file.st.st_mode & (S_IXUSR | S_IXGRP | S_IXOTH)) {       

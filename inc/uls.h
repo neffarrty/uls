@@ -66,5 +66,7 @@ int mx_max_element(char*** info, int size, int col);
 
 void mx_print_xattr(const char *path);
 
+void mx_print_color_name(t_fileinfo file);
+
 #endif
 

@@ -1,6 +1,6 @@
 #include "../inc/uls.h"
 
-void mx_long_output(t_fileinfo files[], int size, unsigned char flags) {
+void mx_long_output(t_fileinfo files[], int size, unsigned short flags) {
     blkcnt_t total = 0;
 
     char*** info = (char***)malloc(size * sizeof(char**));
