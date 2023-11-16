@@ -2,17 +2,7 @@
 
 void mx_print_files(t_fileinfo files[], int size, unsigned short flags) {
     int max = mx_max_name_length(files, size);
-    int cols = 0;
-    
-    struct winsize ws;
-    ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
-    if(flags & FLAG_G){
-        cols  = ws.ws_col / (max);
-    }
-    else {
-        cols = mx_count_cols(max);
-    }
-
+    int cols = mx_count_cols(max, flags);
 
     int rows = size / cols;
     if(size % cols != 0) {

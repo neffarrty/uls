@@ -20,8 +20,8 @@
 
 typedef struct s_fileinfo {
     char *name;
-    struct stat st;
     char *path;
+    struct stat st;
 }              t_fileinfo;
 
 DIR* mx_opendir(const char* name);
@@ -54,7 +54,7 @@ void mx_long_output(t_fileinfo files[], int size, unsigned short flags);
 
 char *mx_concat_dirs(char* fst, char* scd);
 
-int mx_count_cols(int max);
+int mx_count_cols(int max, unsigned short flags);
 
 void mx_print_link(const char *path);
 
