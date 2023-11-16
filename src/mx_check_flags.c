@@ -26,6 +26,7 @@ int mx_check_flags(int argc, char *argv[], unsigned short *flags) {
                         *flags = *flags | FLAG_h;
                         break;
                     case '@':
+                        *flags = *flags | FLAG_AT;
                         break;
                     case 'e':
                         *flags = *flags | FLAG_e;
