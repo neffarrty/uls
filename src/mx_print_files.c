@@ -23,7 +23,12 @@ void mx_print_files(t_fileinfo files[], int size, int flags) {
             for(int j = 0; j < cols; j++) {
                 int index = i + j * rows;
                 if(index < size ) {
-                    mx_printstr(files[index].name);
+                    if(flags & FLAG_G){
+                        mx_print_color_name(files[index]);
+                    }
+                    else {
+                        mx_printstr(files[index].name);
+                    }
                     mx_printnchar(' ', max - mx_strlen(files[index].name));
                 }
                 if(j != cols - 1) {

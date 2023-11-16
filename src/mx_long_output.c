@@ -53,15 +53,28 @@ void mx_long_output(t_fileinfo files[], int size) {
             mx_print_link(files[i].path);
         }
         mx_printchar('\n');
-        char xattr_name[XATTR_MAXNAMELEN];
-        ssize_t xattr = listxattr(files[i].path, xattr_name, XATTR_MAXNAMELEN, XATTR_NOFOLLOW);
+        // char xattr_name[XATTR_MAXNAMELEN];
+        // ssize_t xattr = listxattr(files[i].path, xattr_name, XATTR_MAXNAMELEN, XATTR_NOFOLLOW);
+        // if(xattr > 0) {
+        //     int len = getxattr(files[i].path, xattr_name, NULL, 0,0,XATTR_NOFOLLOW);
+        //     mx_printchar('\t'); 
+        //     mx_printstr(xattr_name);
+        //     mx_printchar('\t'); 
+        //     mx_printint(len);
+        //     mx_printchar('\n');
+        // }
+        int len_of_atribute = listxattr(files[i].path,NULL,0,XATTR_NOFOLLOW);
+        char* list = malloc(len_of_atribute);
+        ssize_t xattr = listxattr(files[i].path, list, XATTR_MAXNAMELEN, XATTR_NOFOLLOW);
         if(xattr > 0) {
-            int len = getxattr(files[i].path, xattr_name, NULL, 0,0,XATTR_NOFOLLOW);
-            mx_printchar('\t'); 
-            mx_printstr(xattr_name);
-            mx_printchar('\t'); 
-            mx_printint(len);
-            mx_printchar('\n');
+            for(char *list1 = list; list1 < list + xattr; list1 += strlen(list1)+1){
+                int len = getxattr(files[i].path, list1, NULL, 0,0,XATTR_NOFOLLOW);
+                mx_printchar('\t'); 
+                mx_printstr(list1);
+                mx_printchar('\t'); 
+                mx_printint(len);
+                mx_printchar('\n');
+            }
         }
 
     }

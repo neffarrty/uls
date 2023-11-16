@@ -1,6 +1,15 @@
 #ifndef ULS_H
 #define ULS_H
 
+#define RED   "\x1B[31m"
+#define GRN   "\x1B[32m"
+#define YEL   "\x1B[33m"
+#define BLU   "\x1B[34m"
+#define MAG   "\x1B[35m"
+#define CYN   "\x1B[36m"
+#define WHT   "\x1B[37m"
+#define RESET "\x1B[0m"
+
 #include "../libmx/inc/libmx.h"
 #include "flags.h"
 #include <string.h>
@@ -62,7 +71,7 @@ char* mx_get_permissions(t_fileinfo file);
 
 int mx_max_element(char*** info, int size, int col);
 
-char mx_print_color_name(t_fileinfo file);
+void mx_print_color_name(t_fileinfo file);
 
 #endif
 
