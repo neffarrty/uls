@@ -15,9 +15,11 @@ int mx_check_flags(int argc, char *argv[], unsigned short *flags) {
                         break;
                     case 'A':
                         *flags = *flags | FLAG_A;
+                        *flags = *flags & ~FLAG_a;
                         break;
                     case 'a':
                         *flags = *flags | FLAG_a;
+                        *flags = *flags & ~FLAG_A;
                         break;
                     case 'G':
                         *flags = *flags | FLAG_G;
@@ -36,9 +38,11 @@ int mx_check_flags(int argc, char *argv[], unsigned short *flags) {
                         break;
                     case '1':
                         *flags = *flags | FLAG_1;
+                        *flags = *flags & ~FLAG_C;
                         break;
                     case 'C':
                         *flags = *flags | FLAG_C;
+                        *flags = *flags & ~FLAG_1;
                         break;
                     case 'r':
                         *flags = *flags | FLAG_r;
@@ -48,9 +52,11 @@ int mx_check_flags(int argc, char *argv[], unsigned short *flags) {
                         break;
                     case 'u':
                         *flags = *flags | FLAG_u;
+                        *flags = *flags & ~FLAG_c;
                         break;
                     case 'c':
                         *flags = *flags | FLAG_c;
+                        *flags = *flags & ~FLAG_u;
                         break;
                     case 'S':
                         *flags = *flags | FLAG_S;

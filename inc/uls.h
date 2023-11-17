@@ -70,3 +70,22 @@ void mx_print_color_name(t_fileinfo file);
 
 #endif
 
+bool mx_cmp_mtime(t_fileinfo a, t_fileinfo b) {
+    if(a.st.st_mtime == b.st.st_mtime) {
+        return mx_cmp_rname(a, b);
+    }
+    return a.st.st_mtime < b.st.st_mtime;
+}
+
+int isSorted = 0;
+while(!isSorted) {
+    isSorted = 1;
+    if(cmp(files[i], files[i + 1])) {
+     isSorted = 0;
+     
+     t_fileinfo buff = files[i];
+     files[i] = files[i + 1];
+     files[i + 1] = buff;
+    }
+}
+
