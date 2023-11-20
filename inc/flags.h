@@ -1,22 +1,22 @@
 #ifndef FLAGS_H
 #define FLAGS_H
 
-#define FLAG_l  1 << 0
-#define FLAG_R  1 << 1
-#define FLAG_A  1 << 2
-#define FLAG_a  1 << 3
-#define FLAG_G  1 << 4
-#define FLAG_h  1 << 5
-#define FLAG_AT 1 << 6
-#define FLAG_e  1 << 7
-#define FLAG_T  1 << 8
-#define FLAG_1  1 << 9
-#define FLAG_C  1 << 10
-#define FLAG_r  1 << 11
-#define FLAG_t  1 << 12
-#define FLAG_u  1 << 13
-#define FLAG_c  1 << 14
-#define FLAG_S  1 << 15
+#define FLAG_l  0x01  // completed, but need to fix output with old data
+#define FLAG_R  0x02  // completed
+#define FLAG_A  0x04  // completed
+#define FLAG_a  0x08  // completed
+#define FLAG_G  0x10  // completed
+#define FLAG_h  0x20  // so hard, syka blyaaaaaatttt bim bim bam bam 
+#define FLAG_AT 0x40  // completed, tabulation not completed ska blyat bim bim bam bam
+#define FLAG_e  0x80
+#define FLAG_T  0x100  // completed
+#define FLAG_1  0x200  // completed
+#define FLAG_C  0x400 // completed
+#define FLAG_r  0x800
+#define FLAG_t  0x1000
+#define FLAG_u  0x2000
+#define FLAG_c  0x4000
+#define FLAG_S  0x8000 // completed
 
 int mx_check_flags(int argc, char *argv[], unsigned short *flags);
 

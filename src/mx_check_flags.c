@@ -1,25 +1,25 @@
 #include "uls.h"
 
 int mx_check_flags(int argc, char *argv[], unsigned short *flags) {
-    int count_args = 0;
+    int count_files = 0;
 
     for(int i = 1; i < argc; i++) {
         if(argv[i][0] == '-') {
             for(int j = 1; j < mx_strlen(argv[i]); j++) {
                 switch(argv[i][j]) {
                     case 'l':
-                        *flags = *flags | FLAG_l;
+                        *flags = (*flags | FLAG_l) & ~(FLAG_C | FLAG_1);
                         break;
                     case 'R':
                         *flags = *flags | FLAG_R;
                         break;
                     case 'A':
-                        *flags = *flags | FLAG_A;
-                        *flags = *flags & ~FLAG_a;
+                        if( !(*flags & FLAG_a)){
+                            *flags = *flags | FLAG_A;
+                        }
                         break;
                     case 'a':
-                        *flags = *flags | FLAG_a;
-                        *flags = *flags & ~FLAG_A;
+                        *flags = (*flags | FLAG_a) & ~FLAG_A;
                         break;
                     case 'G':
                         *flags = *flags | FLAG_G;
@@ -37,12 +37,10 @@ int mx_check_flags(int argc, char *argv[], unsigned short *flags) {
                         *flags = *flags | FLAG_T;
                         break;
                     case '1':
-                        *flags = *flags | FLAG_1;
-                        *flags = *flags & ~FLAG_C;
+                        *flags = (*flags | FLAG_1) & ~(FLAG_C | FLAG_l);
                         break;
                     case 'C':
-                        *flags = *flags | FLAG_C;
-                        *flags = *flags & ~FLAG_1;
+                        *flags = (*flags | FLAG_C) & ~(FLAG_1 | FLAG_l);
                         break;
                     case 'r':
                         *flags = *flags | FLAG_r;
@@ -51,12 +49,10 @@ int mx_check_flags(int argc, char *argv[], unsigned short *flags) {
                         *flags = *flags | FLAG_t;
                         break;
                     case 'u':
-                        *flags = *flags | FLAG_u;
-                        *flags = *flags & ~FLAG_c;
+                        *flags = (*flags | FLAG_u) & ~FLAG_c;
                         break;
                     case 'c':
-                        *flags = *flags | FLAG_c;
-                        *flags = *flags & ~FLAG_u;
+                        *flags = (*flags | FLAG_c) & ~FLAG_u;
                         break;
                     case 'S':
                         *flags = *flags | FLAG_S;
@@ -65,16 +61,16 @@ int mx_check_flags(int argc, char *argv[], unsigned short *flags) {
                         mx_printerr("uls: invalid option -- ");
                         write(STDERR_FILENO, &argv[i][j], 1);
                         mx_printchar('\n');
-                        mx_printerr("usage: ls [-l] [file ...]\n");
+                        mx_printerr("usage: uls [-@ABCFGHILOPRSTUWabcdefghiklmnopqrstuvwx1] [file ...]\n");
                         exit(EXIT_FAILURE);
                 }
             }
         }
         else {
-            count_args++;
+            count_files++;
         }
     }
 
-    return count_args;
+    return count_files;
 }
 

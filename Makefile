@@ -1,13 +1,6 @@
 CC = clang
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 LDFLAGS = $(LIB_DIR)/$(LIB)
-
-UNAME := $(shell uname)
-
-ifeq ($(UNAME), Linux)
-    LDFLAGS += -lacl
-endif
-
 INCLUDES = -I$(INC_DIR) -I$(LIB_DIR)/$(INC_DIR)
 
 SRC_DIR = src

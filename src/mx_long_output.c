@@ -18,7 +18,13 @@ void mx_long_output(t_fileinfo files[], int size, unsigned short flags, bool is_
         info[i][2] = mx_strdup(pwd->pw_name);
         info[i][3] = mx_strdup(grp->gr_name);
         info[i][4] = mx_itoa(file.st.st_size);
-        info[i][5] = mx_strndup(&ctime(&file.st.st_mtime)[4], 12);
+        if(flags & FLAG_T){
+            info[i][5] = mx_strndup(&ctime(&file.st.st_mtime)[4], 20); 
+        }
+        else{
+            info[i][5] =  mx_strndup(&ctime(&file.st.st_mtime)[4], 12);
+        }
+        
         info[i][6] = mx_strdup(file.name);
         total += file.st.st_blocks;
     }
@@ -58,17 +64,6 @@ void mx_long_output(t_fileinfo files[], int size, unsigned short flags, bool is_
             mx_print_link(files[i].path);
         }
         mx_printchar('\n');
-
-        // char xattr_name[XATTR_MAXNAMELEN];
-        // ssize_t xattr = listxattr(files[i].path, xattr_name, XATTR_MAXNAMELEN, XATTR_NOFOLLOW);
-        // if(xattr > 0) {
-        //     int len = getxattr(files[i].path, xattr_name, NULL, 0,0,XATTR_NOFOLLOW);
-        //     mx_printchar('\t'); 
-        //     mx_printstr(xattr_name);
-        //     mx_printchar('\t'); 
-        //     mx_printint(len);
-        //     mx_printchar('\n');
-        // }
 
         if(flags & FLAG_AT) {
             mx_print_xattr(files[i].path);

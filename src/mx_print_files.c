@@ -10,10 +10,15 @@ void mx_print_files(t_fileinfo files[], int size, unsigned short flags, bool is_
     }
 
     if(!isatty(STDOUT_FILENO) || flags & FLAG_1){
-       for(int i = 0; i < size; i++){
-            mx_printstr(files[i].name);
-            mx_printchar('\n');
-       }
+        if(flags & FLAG_l){
+            mx_long_output(files,size,flags,is_dir);
+        }
+        else {
+            for(int i = 0; i < size; i++){
+                    mx_printstr(files[i].name);
+                    mx_printchar('\n');
+            }
+        }
     }
     else if(flags & FLAG_l) {
         mx_long_output(files, size, flags, is_dir);
