@@ -1,5 +1,28 @@
 #include "../inc/uls.h"
 
+char* mx_get_time_str(time_t tm, unsigned short flags) {
+    char* time_str = ctime(&tm);
+    
+    if(flags & FLAG_T) {
+        return mx_strndup(&time_str[4], 20);
+    }
+
+    time_t cur_time = time(NULL);
+    time_t diff = (cur_time - tm) > 0 ? cur_time - tm : tm - cur_time;
+
+    if(diff > 15768000) {
+        char* tmp = mx_strndup(&time_str[4], 7);
+        char* res = mx_strjoin(tmp, &time_str[19]);
+        res[mx_strlen(res) - 1] = '\0';
+        free(tmp);
+        
+        return res;
+    }
+
+    return mx_strndup(&time_str[4], 12);
+}
+
+
 void mx_long_output(t_fileinfo files[], int size, unsigned short flags, bool is_dir) {
     blkcnt_t total = 0;
 
@@ -18,13 +41,7 @@ void mx_long_output(t_fileinfo files[], int size, unsigned short flags, bool is_
         info[i][2] = mx_strdup(pwd->pw_name);
         info[i][3] = mx_strdup(grp->gr_name);
         info[i][4] = mx_itoa(file.st.st_size);
-        if(flags & FLAG_T){
-            info[i][5] = mx_strndup(&ctime(&file.st.st_mtime)[4], 20); 
-        }
-        else{
-            info[i][5] =  mx_strndup(&ctime(&file.st.st_mtime)[4], 12);
-        }
-        
+        info[i][5] = mx_get_time_str(file.st.st_mtime, flags);      
         info[i][6] = mx_strdup(file.name);
         total += file.st.st_blocks;
     }

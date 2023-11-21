@@ -10,7 +10,7 @@ void mx_print_xattr(const char *path) {
             int len = getxattr(path, list, NULL, 0, 0, XATTR_NOFOLLOW);
             mx_printchar('\t'); 
             mx_printstr(list);
-            mx_printchar('\t'); 
+            mx_printstr("\t   ");
             mx_printint(len);
             mx_printchar('\n');
         }

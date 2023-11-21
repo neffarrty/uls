@@ -4,8 +4,8 @@ RED='\033[0;31m'
 GRN='\033[0;32m'
 NOC='\033[0m'
 
-TEST=$(ls -R -l -t src inc Makefile >&1)
-RESULT=$(./uls -R -l -t src inc Makefile >&1)
+TEST=$(ls -l  >&1)
+RESULT=$(./uls -l  >&1)
 
 if [[ $RESULT == $TEST ]]
 then

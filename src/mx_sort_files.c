@@ -3,10 +3,10 @@
 void mx_sort_files(t_fileinfo files[], int size, unsigned short flags) {
     bool (*cmp)(t_fileinfo, t_fileinfo) = NULL;
 
-	if(flags & FLAG_r) {
-		cmp = mx_cmp_rname;
-	}
-	else if(flags & FLAG_t) {
+	// if(flags & FLAG_r) {
+	// 	cmp = mx_cmp_rname;
+	// }
+	if(flags & FLAG_t) {
 		cmp = mx_cmp_mtime;
 	}
 	else if(flags & FLAG_u) {
@@ -21,18 +21,35 @@ void mx_sort_files(t_fileinfo files[], int size, unsigned short flags) {
 	else {
 		cmp = mx_cmp_name;
 	}
+	if(flags & FLAG_r){
+		int isSorted = 0;
+		while(!isSorted) {
+			isSorted = 1;
 
-	int isSorted = 0;
-	while(!isSorted) {
-		isSorted = 1;
+			for(int i = 0; i < size - 1; i++) {
+				if(!cmp(files[i], files[i + 1])) {
+					isSorted = 0;
+					
+					t_fileinfo buff = files[i];
+					files[i] = files[i + 1];
+					files[i + 1] = buff;
+				}
+			}
+		}
+	}
+	else {
+		int isSorted = 0;
+		while(!isSorted) {
+			isSorted = 1;
 
-		for(int i = 0; i < size - 1; i++) {
-			if(cmp(files[i], files[i + 1])) {
-				isSorted = 0;
-				
-				t_fileinfo buff = files[i];
-				files[i] = files[i + 1];
-				files[i + 1] = buff;
+			for(int i = 0; i < size - 1; i++) {
+				if(cmp(files[i], files[i + 1])) {
+					isSorted = 0;
+					
+					t_fileinfo buff = files[i];
+					files[i] = files[i + 1];
+					files[i + 1] = buff;
+				}
 			}
 		}
 	}
