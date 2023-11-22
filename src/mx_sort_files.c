@@ -3,17 +3,16 @@
 void mx_sort_files(t_fileinfo files[], int size, unsigned short flags) {
     bool (*cmp)(t_fileinfo, t_fileinfo) = NULL;
 
-	// if(flags & FLAG_r) {
-	// 	cmp = mx_cmp_rname;
-	// }
 	if(flags & FLAG_t) {
-		cmp = mx_cmp_mtime;
-	}
-	else if(flags & FLAG_u) {
-		cmp = mx_cmp_atime;
-	}
-	else if(flags & FLAG_c) {
-		cmp = mx_cmp_ctime;
+		if(flags & FLAG_u) {
+			cmp = mx_cmp_atime;
+		}
+		else if(flags & FLAG_c) {
+			cmp = mx_cmp_ctime;
+		}
+		else {
+			cmp = mx_cmp_mtime;
+		}
 	}
 	else if(flags & FLAG_S) {
 		cmp = mx_cmp_size;
