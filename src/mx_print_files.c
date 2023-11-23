@@ -11,7 +11,7 @@ void mx_print_files(t_fileinfo files[], int size, unsigned short flags, bool is_
 
     if(!isatty(STDOUT_FILENO) || flags & FLAG_1){
         if(flags & FLAG_l){
-            mx_long_output(files,size,flags,is_dir);
+            mx_long_output(files, size, flags, is_dir);
         }
         else {
             for(int i = 0; i < size; i++){
@@ -24,29 +24,29 @@ void mx_print_files(t_fileinfo files[], int size, unsigned short flags, bool is_
         mx_long_output(files, size, flags, is_dir);
     }
     else {
-        for(int i = 0; i < rows && size > 0; i++) {
-            for(int j = 0; j < cols; j++) {
-                int index = i + j * rows;
-                if(index < size ) {
-                    if(flags & FLAG_G){
-                        mx_print_color_name(files[index]);
+            for(int i = 0; i < rows && size > 0; i++) {
+                for(int j = 0; j < cols; j++) {
+                    int index = i + j * rows;
+                    if(index < size ) {
+                        if(flags & FLAG_G){
+                            mx_print_color_name(files[index]);
+                        }
+                        else {
+                            mx_printstr(files[index].name);
+                        }
+                        mx_printnchar(' ', max - mx_strlen(files[index].name));
                     }
-                    else {
-                        mx_printstr(files[index].name);
+                    if(j != cols - 1) {
+                        if(flags & FLAG_G){
+                            mx_printchar(' ');
+                        }
+                        else{
+                            mx_printchar('\t');
+                        }
                     }
-                    mx_printnchar(' ', max - mx_strlen(files[index].name));
                 }
-                if(j != cols - 1) {
-                    if(flags & FLAG_G){
-                        mx_printchar(' ');
-                    }
-                    else{
-                        mx_printchar('\t');
-                    }
-                }
+                mx_printchar('\n');
             }
-            mx_printchar('\n');
         }
     }
-}
 

@@ -40,6 +40,6 @@ uninstall:
 
 reinstall: clean uninstall
 	@make -C $(LIB_DIR) reinstall
-	@make all
+	@make $(TARGET)
 
 

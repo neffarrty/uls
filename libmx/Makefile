@@ -1,28 +1,24 @@
+FLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
 CC = clang
-CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
-ARFLAGS = rcs
 
-TARGET = libmx.a
+name = libmx.a
 
-OBJ_DIR = obj
-SRC_DIR = src
+all: $(name)
 
-.PHONY: all clean uninstall reinstall
-
-all: $(TARGET)
-	
-$(TARGET):	
-	@mkdir $(OBJ_DIR)
-	@$(CC) $(CFLAGS) -c $(SRC_DIR)/*.c
-	@mv *.o $(OBJ_DIR)
-	@ar $(ARFLAGS) $@ $(OBJ_DIR)/*.o
-
+$(name):
+	@mkdir obj/
+	@$(CC) $(FLAGS) -c src/*.c
+	@mv *.o obj/
+	@ar rcs $(name) obj/*.o
 clean:
-	@rm -rf $(OBJ_DIR)
+	@rm -rf obj/
 
 uninstall:
-	@rm -f $(TARGET)
+	@rm -f $(name)
 
-reinstall: clean reinstall all
+reinstall:
+	@make clean
+	@make uninstall
+	@make all
 
 
