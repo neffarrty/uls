@@ -37,21 +37,19 @@ int main(int argc, char *argv[]) {
         for(int k = 1; k < argc; k++) {
             if(argv[k][0] != '-') {
                 struct stat buf;
-                int res = lstat(argv[k], &buf);
-                
-                if(res != -1) {
-                    if(S_ISDIR(buf.st_mode)) {
-                        dirs[i].name = mx_strdup(argv[k]);
-                        dirs[i].path = mx_strdup(argv[k]);
-                        lstat(argv[k], &dirs[i].st);
-                        i++;
-                    }
-                    else {
-                        files[j].name = mx_strdup(argv[k]);
-                        files[j].path = mx_strdup(argv[k]);
-                        lstat(argv[k], &files[j].st);
-                        j++;
-                    }
+                mx_lstat(argv[k], &buf);
+            
+                if((buf.st_mode & S_IFMT) == S_IFDIR) {
+                    dirs[i].name = mx_strdup(argv[k]);
+                    dirs[i].path = mx_strdup(argv[k]);
+                    lstat(argv[k], &dirs[i].st);
+                    i++;
+                }
+                else {
+                    files[j].name = mx_strdup(argv[k]);
+                    files[j].path = mx_strdup(argv[k]);
+                    lstat(argv[k], &files[j].st);
+                    j++;
                 }
             }
         }

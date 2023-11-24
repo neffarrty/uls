@@ -68,6 +68,8 @@ void mx_print_color_name(t_fileinfo file);
 
 char* mx_get_time_str(t_fileinfo file, unsigned short flags);
 
+void mx_lstat(const char* pathname,struct stat* buf);
+
 #endif
 
 

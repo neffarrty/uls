@@ -6,19 +6,19 @@ name = libmx.a
 all: $(name)
 
 $(name):
-	@mkdir obj/
-	@$(CC) $(FLAGS) -c src/*.c
-	@mv *.o obj/
-	@ar rcs $(name) obj/*.o
+	mkdir obj/
+	$(CC) $(FLAGS) -c src/*.c
+	mv *.o obj/
+	ar rcs $(name) obj/*.o
 clean:
-	@rm -rf obj/
+	rm -rf obj/
 
 uninstall:
-	@rm -f $(name)
+	rm -f $(name)
 
 reinstall:
-	@make clean
-	@make uninstall
-	@make all
+	make clean
+	make uninstall
+	make all
 
 

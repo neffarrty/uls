@@ -24,9 +24,8 @@ void mx_print_dir(char* name, unsigned short flags) {
             }
         }
         files[i].path = mx_concat_dirs(name, entry->d_name);
-
         files[i].name = mx_strdup(entry->d_name);
-        lstat(files[i].path, &files[i].st);
+        mx_lstat(files[i].path, &files[i].st);
         i++;
     }
     mx_sort_files(files, size, flags);
@@ -42,8 +41,8 @@ void mx_print_dir(char* name, unsigned short flags) {
             if(mx_strcmp(files[i].name, ".") != 0 && mx_strcmp(files[i].name, "..") != 0) {
                 char *path = mx_concat_dirs(name, files[i].name);
                 struct stat st;
-
-                lstat(path, &st);
+                mx_lstat(path, &st);
+                
                 if((st.st_mode & S_IFMT) == S_IFDIR) {
                     mx_printchar('\n');
                     mx_print_dir(path, flags);
