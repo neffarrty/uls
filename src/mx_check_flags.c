@@ -60,7 +60,7 @@ int mx_check_flags(int argc, char *argv[], unsigned short *flags) {
                     default:
                         mx_printerr("uls: invalid option -- ");
                         write(STDERR_FILENO, &argv[i][j], 1);
-                        mx_printchar('\n');
+                        mx_printerr("\n");
                         mx_printerr("usage: uls [-@ABCFGHILOPRSTUWabcdefghiklmnopqrstuvwx1] [file ...]\n");
                         exit(EXIT_FAILURE);
                 }

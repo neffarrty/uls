@@ -1,81 +1,9 @@
 #include "../inc/uls.h"
 
-/*----------------------------------------------------------------------------------*/
-
-int mx_get_dirs_arr_size(char* argv[], int argc, unsigned short flags, int* status) {
-    int size = 0;
-
-    for(int i = 1; i < argc; i++) {
-        if(argv[i][0] != '-') {
-            struct stat buf;
-            int res = lstat(argv[i], &buf);
-            
-            if(res == -1) {
-                *status = EXIT_FAILURE;
-                mx_print_error(argv[i]);
-            }
-            else {
-                if((buf.st_mode & S_IFMT) == S_IFDIR) {
-                    size++;
-                }
-                else if((buf.st_mode & S_IFMT) == S_IFLNK) {
-                    struct stat st;
-                    stat(argv[i], &st);
-                    
-                    if((st.st_mode & S_IFMT) == S_IFDIR && !(flags & FLAG_l)) {
-                        size++;
-                    }
-                }
-            }
-        }
-    }
-
-    return size;
-}
-
-int mx_get_file_arr_size(char* argv[], int argc, unsigned short flags, int* status) {
-   int size = 0;
-
-    for(int i = 1; i < argc; i++) {
-        if(argv[i][0] != '-') {
-            struct stat buf;
-            int res = lstat(argv[i], &buf);
-            if(res == -1) {
-                *status = EXIT_FAILURE;
-                mx_print_error(argv[i]);
-            }
-            else {
-                if((buf.st_mode & S_IFMT) == S_IFLNK) {
-                    struct stat st;
-                    stat(argv[i], &st);
-                    
-                    if((st.st_mode & S_IFMT) == S_IFDIR && !(flags & FLAG_l)) {
-                        continue;
-                    }
-                    else {
-                        size++;
-                    }
-                }
-                else {
-                    size++;
-                }
-            }
-        }
-    }
-
-    return size;
-}
-
-/*----------------------------------------------------------------------------------*/
-
 int main(int argc, char *argv[]) {  
     unsigned short flags = 0;
     int exit_status = EXIT_SUCCESS;
     int count_files = mx_check_flags(argc, argv, &flags);
-    // struct stat nul;
-    // lstat("/dev/fbt", &nul);
-    // mx_printstr(mx_nbr_to_hex(nul.st_rdev));
-    // mx_printchar('\n');
     
     if(count_files > 0) {
         int files_size = 0;
