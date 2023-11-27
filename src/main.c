@@ -94,14 +94,11 @@ int main(int argc, char *argv[]) {
         if(files_size > 0){
             mx_print_files(files, files_size, flags, false);
         }
-        if(dirs_size == 1 && mx_dir_size(dirs[0].path, flags) == 0 && count_files == 1){
-            return exit_status;
-        }
         for(int i = 0; i < dirs_size; i++) {
             if( i != 0 || files_size > 0){
                 mx_printchar('\n');
             }
-            mx_print_dir(dirs[i].name, flags, &exit_status, dirs_size > 1 || files_size > 0);
+            mx_print_dir(dirs[i].name, flags, &exit_status, count_files > 1);
         }
 
         mx_free_fileinfo_arr(dirs, dirs_size);
