@@ -31,7 +31,7 @@ char* mx_get_grpname(t_fileinfo file) {
     return mx_strdup(grp->gr_name);
 }
 
-void mx_long_output(t_fileinfo files[], int size, unsigned short flags, bool is_dir) {
+void mx_long_output(t_fileinfo files[], int size, unsigned short flags, bool is_total) {
     blkcnt_t total = 0;
 
     char*** info = (char***)malloc(size * sizeof(char**));
@@ -51,7 +51,7 @@ void mx_long_output(t_fileinfo files[], int size, unsigned short flags, bool is_
         info[i][6] = mx_strdup(file.name);
         total += file.st.st_blocks;
     }
-    if(is_dir) {
+    if(is_total) {
         mx_printstr("total ");
         mx_printlong(total);
         mx_printchar('\n');

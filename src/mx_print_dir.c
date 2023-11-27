@@ -7,9 +7,6 @@ void mx_print_dir(char* name, unsigned short flags, int* exit_status, bool print
     }
     DIR* dir = opendir(name);
     if(dir == NULL){
-        if(flags & FLAG_l){
-            mx_printstr("total 0\n");
-        }
         mx_print_error(name);
         *exit_status = EXIT_FAILURE;
     }
@@ -41,7 +38,7 @@ void mx_print_dir(char* name, unsigned short flags, int* exit_status, bool print
         }
         mx_sort_files(files, size, flags);
         
-        mx_print_files(files, size, flags, true);
+        mx_print_files(files, size, flags, size > 0);
 
         if(flags & FLAG_R) {
             for(int i = 0; i < size; i++) {

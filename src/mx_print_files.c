@@ -1,6 +1,6 @@
 #include "../inc/uls.h"
 
-void mx_print_files(t_fileinfo files[], int size, unsigned short flags, bool is_dir) {
+void mx_print_files(t_fileinfo files[], int size, unsigned short flags, bool is_total) {
     int max = mx_max_name_length(files, size);
     int cols = mx_count_cols(max, flags);
 
@@ -11,7 +11,7 @@ void mx_print_files(t_fileinfo files[], int size, unsigned short flags, bool is_
 
     if(!isatty(STDOUT_FILENO) || flags & FLAG_1){
         if(flags & FLAG_l){
-            mx_long_output(files, size, flags, is_dir);
+            mx_long_output(files, size, flags, is_total);
         }
         else {
             for(int i = 0; i < size; i++){
@@ -21,7 +21,7 @@ void mx_print_files(t_fileinfo files[], int size, unsigned short flags, bool is_
         }
     }
     else if(flags & FLAG_l) {
-        mx_long_output(files, size, flags, is_dir);
+        mx_long_output(files, size, flags, is_total);
     }
     else {
             for(int i = 0; i < rows && size > 0; i++) {
