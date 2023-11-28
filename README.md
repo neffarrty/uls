@@ -21,31 +21,30 @@ Create a program that works as a system utility ls and implements basic function
 
      -A      List all entries including those starting with a dot .
              Except for . and ..
-             This option is always set for the superuser (via sudo).
 
      -a      List all entries including those starting with a dot .
 
-     -C      Force multi-column output; this is the default when output is to
-             a terminal.
+     -C      Force multi-column output.
 
      -c      Use time when file status was last changed for sorting or printing.
 
      -G      Enable colour output.
 
-     -l      List in long format. For terminal output, a total sum of all the file sizes is 
-             output on a line before the long listing. If the file is a symbolic link the pathname of the linked-to file is
+    -l       List in long format. Ownership, Date/Time etc (See below)
+             For terminal output, a total sum of all the file sizes is 
+             output on a line before the long listing.
+             If the file is a symbolic link the pathname of the linked-to file is
              preceded by ->
 
      -R      Recursively list subdirectories encountered.
 
      -r      Reverse the order of the sort to get reverse lexicographical
              order or the oldest entries first.
-             (or largest files last, if combined with sort by size)
 
-     -S      Sort files by size
+     -S      Sort files by size.
 
-     -T      When used with the -l (lowercase letter ``ell'') option, display
-             complete time information for the file, including month, day,
+     -T      When used with the -l option, display complete time
+             information for the file, including month, day,
              hour, minute, second, and year.
 
      -t      Sort by time modified (most recently modified first) before
