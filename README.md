@@ -99,6 +99,13 @@ drwxr-xr-x 2 neo staff  64 May 17 14:57 dir3$
 
 ## Bulding the program
 ```shell
+# clone repository
+git clone https://github.com/neffarrty/Ucode-Connect-Track-C-uls.git
+
+# enter project directory
+cd Ucode-Connect-Track-C-uls/
+
+# run Makefile
 make install
 ```
 
