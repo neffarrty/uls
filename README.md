@@ -13,6 +13,47 @@ Create a program that works as a system utility ls and implements basic function
  * error handling, as in the original *ls* . Output uls as the program name instead of ls where necessary
  * the multicolumn output format when the option *-l* isn't specified
 
+## Implemented options
+```
+     -@      Display extended attribute keys and sizes.
+
+     -1      Force output to be one entry per line. This is the default when output is not to a terminal.
+
+     -A      List all entries including those starting with a dot .
+             Except for . and ..
+             This option is always set for the superuser (via sudo).
+
+     -a      List all entries including those starting with a dot .
+
+     -C      Force multi-column output; this is the default when output is to
+             a terminal.
+
+     -c      Use time when file status was last changed for sorting or printing.
+
+     -G      Enable colour output.
+
+     -l      List in long format. For terminal output, a total sum of all the file sizes is 
+             output on a line before the long listing. If the file is a symbolic link the pathname of the linked-to file is
+             preceded by ->
+
+     -R      Recursively list subdirectories encountered.
+
+     -r      Reverse the order of the sort to get reverse lexicographical
+             order or the oldest entries first.
+             (or largest files last, if combined with sort by size)
+
+     -S      Sort files by size
+
+     -T      When used with the -l (lowercase letter ``ell'') option, display
+             complete time information for the file, including month, day,
+             hour, minute, second, and year.
+
+     -t      Sort by time modified (most recently modified first) before
+             sorting the operands by lexicographical order.
+
+     -u      Use time of last access, instead of last modification of the file
+             for sorting (-t) or printing (-l).
+```
 
 ## Example of console output
 ```shell
