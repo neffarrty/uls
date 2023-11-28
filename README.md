@@ -30,7 +30,7 @@ Create a program that works as a system utility ls and implements basic function
 
      -G      Enable colour output.
 
-    -l       List in long format. Ownership, Date/Time etc (See below)
+     -l      List in long format. Ownership, Date/Time etc (See below)
              For terminal output, a total sum of all the file sizes is 
              output on a line before the long listing.
              If the file is a symbolic link the pathname of the linked-to file is
