@@ -1,11 +1,9 @@
 #include "uls.h"
 
 int mx_dir_size(char* path, unsigned short flags) {
-    DIR* dir = NULL;
-    struct dirent *entry = NULL;
     int size = 0;
-
-    dir = opendir(path);
+    struct dirent *entry = NULL;
+    DIR* dir = opendir(path);
     if(dir == NULL){
         return -1;
     }

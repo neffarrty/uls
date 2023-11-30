@@ -5,21 +5,11 @@ int mx_count_cols(int max, unsigned short flags) {
     struct winsize ws;
     ioctl(STDIN_FILENO, TIOCGWINSZ, &ws);
     
-    if(flags & FLAG_G){
-       if (max % 2 == 0) {
-            max += 1;
-        }
-        else {
-            max += 2 - (max % 2);
-        }       
+    if (max % 8 == 0) {
+        max += 8;
     }
     else {
-        if (max % 8 == 0) {
-            max += 8;
-        }
-        else {
-            max += 8 - (max % 8);
-        }
+        max += 8 - (max % 8);
     }
 
     if(ws.ws_col / max != 0) {
