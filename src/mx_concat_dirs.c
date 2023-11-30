@@ -1,4 +1,4 @@
-#include "../inc/uls.h"
+#include "uls.h"
 
 char *mx_concat_dirs(char* fst, char* scd) {
     char *res = mx_strnew(mx_strlen(fst) + mx_strlen(scd) + 1);

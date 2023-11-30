@@ -1,4 +1,4 @@
-#include "../inc/uls.h"
+#include "uls.h"
 
 DIR* mx_opendir(const char* name, int* exit_status) {
     DIR* dir = opendir(name);

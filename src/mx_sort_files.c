@@ -1,4 +1,4 @@
-#include "../inc/uls.h"
+#include "uls.h"
 
 void mx_sort_files(t_fileinfo files[], int size, unsigned short flags) {
     bool (*cmp)(t_fileinfo, t_fileinfo) = NULL;

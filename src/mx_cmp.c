@@ -1,4 +1,4 @@
-#include "../inc/uls.h"
+#include "uls.h"
 
 bool mx_cmp_atime(t_fileinfo a, t_fileinfo b) {
     if(a.st.st_atime == b.st.st_atime) {

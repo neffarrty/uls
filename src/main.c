@@ -1,4 +1,4 @@
-#include "../inc/uls.h"
+#include "uls.h"
 
 int main(int argc, char *argv[]) {  
     unsigned short flags = 0;

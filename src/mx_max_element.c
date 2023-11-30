@@ -1,4 +1,4 @@
-#include "../inc/uls.h"
+#include "uls.h"
 
 int mx_max_element(char*** info, int size, int col) {
     int max = mx_strlen(info[0][col]);

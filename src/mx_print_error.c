@@ -1,4 +1,4 @@
-#include "../inc/uls.h"
+#include "uls.h"
 
 void mx_print_error(const char* filename) {
     mx_printerr("uls: ");

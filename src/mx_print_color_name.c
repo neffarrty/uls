@@ -1,4 +1,4 @@
-#include "../inc/uls.h"
+#include "uls.h"
 
 void mx_print_color_name(t_fileinfo file) {
     switch(file.st.st_mode & S_IFMT) {

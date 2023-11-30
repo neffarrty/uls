@@ -1,4 +1,4 @@
-#include "../inc/uls.h"
+#include "uls.h"
 
 void mx_printnchar(char c, int n) {
     for(int i = 0; i < n; i++) {

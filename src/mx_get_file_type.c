@@ -1,4 +1,4 @@
-#include "../inc/uls.h"
+#include "uls.h"
 
 char mx_get_file_type(mode_t mode) {
     switch(mode & S_IFMT) {

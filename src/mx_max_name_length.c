@@ -1,4 +1,4 @@
-#include "../inc/uls.h"
+#include "uls.h"
 
 int mx_max_name_length(t_fileinfo arr[], int size) {
     if(size > 0) {

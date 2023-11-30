@@ -1,4 +1,4 @@
-#include "../inc/uls.h"
+#include "uls.h"
 
 void mx_print_xattr(const char *path) {
     ssize_t len_of_atribute = listxattr(path, NULL, 0, XATTR_NOFOLLOW);

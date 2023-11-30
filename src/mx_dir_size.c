@@ -1,4 +1,4 @@
-#include "../inc/uls.h"
+#include "uls.h"
 
 int mx_dir_size(char* path, unsigned short flags) {
     DIR* dir = NULL;

@@ -1,4 +1,4 @@
-#include "../inc/uls.h"
+#include "uls.h"
 
 char* mx_get_permissions(t_fileinfo file) {
     char perms[] = "-rwxrwxrwx ";

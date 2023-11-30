@@ -1,4 +1,4 @@
-#include "../inc/uls.h"
+#include "uls.h"
 
 void mx_print_link(const char *path){
     char buff[PATH_MAX];

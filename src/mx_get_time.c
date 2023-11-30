@@ -1,4 +1,4 @@
-#include "../inc/uls.h"
+#include "uls.h"
 
 char* mx_get_time(t_fileinfo file, unsigned short flags) {
     time_t tm = 0;

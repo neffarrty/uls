@@ -1,4 +1,4 @@
-#include "../inc/uls.h"
+#include "uls.h"
 
 int mx_count_cols(int max, unsigned short flags) {
     int cols = 0;

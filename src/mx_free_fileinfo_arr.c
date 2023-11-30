@@ -1,4 +1,4 @@
-#include "../inc/uls.h"
+#include "uls.h"
 
 void mx_free_fileinfo_arr(t_fileinfo* arr, int size) {
     for(int i = 0; i < size; i++) {

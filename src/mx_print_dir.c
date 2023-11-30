@@ -1,4 +1,4 @@
-#include "../inc/uls.h"
+#include "uls.h"
 
 void mx_print_dir(char* name, unsigned short flags, int* exit_status, bool print_name) {
     if(print_name) {

@@ -1,4 +1,4 @@
-#include "../inc/uls.h"
+#include "uls.h"
 
 char* mx_get_size(t_fileinfo file) {
     if((file.st.st_mode & S_IFMT) == S_IFBLK || (file.st.st_mode & S_IFMT) == S_IFCHR) {

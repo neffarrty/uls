@@ -1,4 +1,4 @@
-#include "../inc/uls.h"
+#include "uls.h"
 
 void mx_print_files(t_fileinfo files[], int size, unsigned short flags, bool is_total) {
     int max = mx_max_name_length(files, size);
