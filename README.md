@@ -1,7 +1,6 @@
 # uls
-----
+
 ![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white)
-----
 
 ## About the program
 Create a program that works as a system utility ls and implements basic functionality of this command:
