@@ -1,4 +1,4 @@
-# Ucode-Connect Track C uls
+# uls
 ----
 ![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white)
 ----
@@ -100,10 +100,10 @@ drwxr-xr-x 2 neo staff  64 May 17 14:57 dir3$
 ## Bulding the program
 ```shell
 # clone repository
-git clone https://github.com/neffarrty/Ucode-Connect-Track-C-uls.git
+git clone https://github.com/neffarrty/uls.git
 
 # enter project directory
-cd Ucode-Connect-Track-C-uls/
+cd uls/
 
 # run Makefile
 make install
