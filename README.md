@@ -1,18 +1,32 @@
 # uls
 
-![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white)
+`uls` is a command-line utility for macOS that recreates the functionality of the standard `ls` command.
 
-## About the program
-Create a program that works as a system utility ls and implements basic functionality of this command:
- * the usage: usage: uls [-l] [file ...]
- * list of directory contents without flags
- * processing of *file* operands for files and directories
- * the *-l* flag, which is one of the most useful flags
- * the view of extended file attributes and access control lists (ACL)
- * error handling, as in the original *ls* . Output uls as the program name instead of ls where necessary
- * the multicolumn output format when the option *-l* isn't specified
+## Table of Contents
+
+- [Overview](#overview)
+- [Implemented Options](#implemented-options)
+- [Usage Examples](#usage-example)
+- [Installation & Building](#installation--building)
+- [License](#license)
+
+## Overview
+
+This console utility works as a system utility `ls` and implements basic functionality of this command:
+
+- the usage: usage: uls [-l] [file ...]
+- list of directory contents without flags
+- processing of _file_ operands for files and directories
+- the _-l_ flag, which is one of the most useful flags
+- the view of extended file attributes and access control lists (ACL)
+- error handling, as in the original _ls_ . Output uls as the program name instead of ls where necessary
+- the multicolumn output format when the option _-l_ isn't specified
+
+> [!WARNING]  
+> The program builds only on MacOS.
 
 ## Implemented options
+
 ```
      -@      Display extended attribute keys and sizes.
 
@@ -30,7 +44,7 @@ Create a program that works as a system utility ls and implements basic function
      -G      Enable colour output.
 
      -l      List in long format. Ownership, Date/Time etc
-             For terminal output, a total sum of all the file sizes is 
+             For terminal output, a total sum of all the file sizes is
              output on a line before the long listing.
              If the file is a symbolic link the pathname of the linked-to file is
              preceded by ->
@@ -53,7 +67,8 @@ Create a program that works as a system utility ls and implements basic function
              for sorting (-t) or printing (-l).
 ```
 
-## Example of console output
+## Usage example
+
 ```shell
 >./uls -z | cat -e
 uls: illegal option -- z
@@ -96,17 +111,19 @@ drwxr-xr-x 2 neo staff  64 May 17 14:57 dir3$
 -rw-r--r-- 1 neo staff   0 May 17 14:56 file5$
 ```
 
-## Bulding the program
+## Installation & Building
+
 ```shell
-# clone repository
+# Clone repository
 git clone https://github.com/neffarrty/uls.git
 
-# enter project directory
+# Enter the project directory
 cd uls/
 
-# run Makefile
+# Run Make to build and install
 make install
 ```
 
-## Note
-The program builds only on MacOS
+## License
+
+This software is licensed under the [MIT](./LICENSE) license.

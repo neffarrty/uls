@@ -43,7 +43,3 @@ reinstall:
 	make clean
 	make uninstall
 	make all
-
-
-
-
